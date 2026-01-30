@@ -1,0 +1,99 @@
+import { Folder, Info, Key } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const DEFAULT_RCLONE_CONFIG_NAME = "gdrive_unofficial_neuro_kar";
+
+interface RemoteConfigSectionProps {
+  remotes: string[];
+  selectedRemote: string | null;
+  onRemoteChange: (remote: string | null) => void;
+  onCreateConfig: () => Promise<void>;
+  onRefreshRemotes: () => Promise<void>;
+  loading: boolean;
+  disabled: boolean;
+}
+
+export function RemoteConfigSection({
+  remotes,
+  selectedRemote,
+  onRemoteChange,
+  onCreateConfig,
+  onRefreshRemotes,
+  loading,
+  disabled,
+}: RemoteConfigSectionProps) {
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2">
+        <Label htmlFor="remote-config" className="flex items-center gap-2">
+          <Folder className="h-4 w-4" />
+          Rclone Remote Config
+        </Label>
+        <HoverCard>
+          <HoverCardTrigger asChild>
+            <Info className="h-4 w-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
+          </HoverCardTrigger>
+          <HoverCardContent className="w-80">
+            <p className="text-sm">
+              If "Generate New Config" is selected, clicking the Key button will
+              open a one-time authorization window in your browser. The config
+              will be saved as "{DEFAULT_RCLONE_CONFIG_NAME}" for future use.
+            </p>
+          </HoverCardContent>
+        </HoverCard>
+      </div>
+      <div className="flex gap-2">
+        <div className="flex-1">
+          <Select
+            value={selectedRemote || "new_config"}
+            onValueChange={(val) =>
+              onRemoteChange(val === "new_config" ? null : val)
+            }
+            onOpenChange={(open) => {
+              if (open) onRefreshRemotes();
+            }}
+            disabled={disabled || loading}
+          >
+            <SelectTrigger id="remote-config">
+              <SelectValue placeholder="Select a remote" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="new_config">Generate New Config</SelectItem>
+              {remotes.map((remote) => (
+                <SelectItem key={remote} value={remote}>
+                  {remote}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {!selectedRemote && (
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            onClick={onCreateConfig}
+            disabled={disabled || loading}
+            title="Authenticate & Generate Config"
+          >
+            <Key className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}

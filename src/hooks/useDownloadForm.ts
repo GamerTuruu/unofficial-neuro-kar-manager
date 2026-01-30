@@ -1,0 +1,29 @@
+import { useState } from "react";
+
+const DEFAULT_GDRIVE_SOURCE = "1B1VaWp-mCKk15_7XpFnImsTdBJPOGx7a";
+
+export function useDownloadForm() {
+  const [source, setSource] = useState(DEFAULT_GDRIVE_SOURCE);
+  const [destination, setDestination] = useState("");
+  const [useSubfolder, setUseSubfolder] = useState(true);
+  const [createBackup, setCreateBackup] = useState(true);
+  const [selectedFiles, setSelectedFiles] = useState<string[] | null>(null);
+
+  const isValid = (remoteConfigValid: boolean) => {
+    return remoteConfigValid && !!source && !!destination;
+  };
+
+  return {
+    source,
+    setSource,
+    destination,
+    setDestination,
+    useSubfolder,
+    setUseSubfolder,
+    createBackup,
+    setCreateBackup,
+    selectedFiles,
+    setSelectedFiles,
+    isValid,
+  };
+}
