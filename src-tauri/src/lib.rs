@@ -64,7 +64,8 @@ pub fn run() {
             api::gdrive::download_gdrive,
             api::gdrive::check_dry_run,
             api::rclone::get_stats,
-            api::rclone::stop_rc_server
+            api::rclone::stop_rc_server,
+            api::local::scan_local_files
         ])
         .build(tauri::generate_context!())
         .expect("error building tauri application")

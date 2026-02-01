@@ -6,6 +6,7 @@ import {
   File,
   Folder,
   Loader2,
+  RefreshCw,
   Search,
   X,
 } from "lucide-react";
@@ -31,6 +32,7 @@ interface FileBrowserModalProps {
   source: string;
   remoteConfig: string;
   initialSelection?: string[];
+  destination?: string;
 }
 
 export default function FileBrowserModal({
@@ -40,11 +42,13 @@ export default function FileBrowserModal({
   source,
   remoteConfig,
   initialSelection = [],
+  destination,
 }: FileBrowserModalProps) {
   const [currentPath, setCurrentPath] = useState("");
   const [history, setHistory] = useState<string[]>([]);
   const [allItems, setAllItems] = useState<GdriveFile[]>([]);
   const [loading, setLoading] = useState(false);
+  const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Selection is a Set of paths relative to root
@@ -187,6 +191,32 @@ export default function FileBrowserModal({
       });
       return next;
     });
+  };
+
+  const handleScanDestination = async () => {
+    if (!destination) return;
+    setScanning(true);
+    try {
+      const existingFiles = await invoke<string[]>("scan_local_files", {
+        path: destination,
+      });
+
+      const existingSet = new Set(existingFiles);
+
+      setSelection((prev) => {
+        const next = new Set(prev);
+        allItems.forEach((item) => {
+          if (!item.isDir && existingSet.has(item.path)) {
+            next.add(item.path);
+          }
+        });
+        return next;
+      });
+    } catch (err) {
+      console.error("Failed to scan destination:", err);
+    } finally {
+      setScanning(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -342,6 +372,19 @@ export default function FileBrowserModal({
           </div>
 
           <div className="flex gap-2">
+            {destination && (
+              <Button
+                variant="secondary"
+                onClick={handleScanDestination}
+                disabled={loading || scanning}
+                title="Select existing files from destination"
+              >
+                <RefreshCw
+                  className={`mr-2 h-4 w-4 ${scanning ? "animate-spin" : ""}`}
+                />
+                Select from Destination
+              </Button>
+            )}
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>

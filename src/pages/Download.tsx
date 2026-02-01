@@ -133,6 +133,7 @@ export default function DownloadPage() {
           source={form.source}
           remoteConfig={remoteConfig.selectedRemote || ""}
           initialSelection={form.selectedFiles || []}
+          destination={form.destination}
         />
       )}
 
