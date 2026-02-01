@@ -2,7 +2,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-dialog";
 import { DownloadCloud } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DownloadsButton } from "@/components/DownloadsButton";
 import { AuthDialog } from "@/components/download/AuthDialog";
 import { BackupWarningDialog } from "@/components/download/BackupWarningDialog";
@@ -13,11 +13,13 @@ import { SourceInputSection } from "@/components/download/SourceInputSection";
 import FileBrowserModal from "@/components/FileBrowserModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useAppConfig } from "@/hooks/useAppConfig";
 import { useDownloadForm } from "@/hooks/useDownloadForm";
 import { useDownloadProcess } from "@/hooks/useDownloadProcess";
 import { useRemoteConfig } from "@/hooks/useRemoteConfig";
 
 export default function DownloadPage() {
+  const { config, loading: configLoading, saveConfig } = useAppConfig();
   const remoteConfig = useRemoteConfig();
   const form = useDownloadForm();
   const download = useDownloadProcess();
@@ -25,6 +27,70 @@ export default function DownloadPage() {
   const [showBrowser, setShowBrowser] = useState(false);
   const [authUrl, setAuthUrl] = useState<string | null>(null);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
+
+  const configRef = useRef(config);
+  useEffect(() => {
+    configRef.current = config;
+  }, [config]);
+
+  // Load config on startup
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Only load once
+  useEffect(() => {
+    if (!configLoading && config) {
+      if (config.lastSource) form.setSource(config.lastSource);
+      if (config.lastDestination) form.setDestination(config.lastDestination);
+
+      if (config.lastRemote) remoteConfig.setSelectedRemote(config.lastRemote);
+
+      form.setSyncMode(config.syncMode);
+      form.setUseSubfolder(config.useSubfolder);
+      form.setCreateBackup(config.createBackup);
+      form.setDeleteExcluded(config.deleteExcluded);
+
+      const savedFiles = config.selectedFiles?.[config.lastSource || ""];
+      if (savedFiles) form.setSelectedFiles(savedFiles);
+    }
+  }, [configLoading]);
+
+  // Save config on changes
+  useEffect(() => {
+    if (configLoading) return;
+
+    const handler = setTimeout(() => {
+      const currentConfig = configRef.current;
+      const currentSource = form.source;
+      const currentFiles = form.selectedFiles || [];
+
+      const newSelectedFiles = {
+        ...currentConfig?.selectedFiles,
+        [currentSource]: currentFiles,
+      };
+
+      saveConfig({
+        lastSource: form.source,
+        lastDestination: form.destination,
+        lastRemote: remoteConfig.selectedRemote || "",
+        syncMode: form.syncMode,
+        useSubfolder: form.useSubfolder,
+        createBackup: form.createBackup,
+        deleteExcluded: form.deleteExcluded,
+        selectedFiles: newSelectedFiles,
+      });
+    }, 1000);
+
+    return () => clearTimeout(handler);
+  }, [
+    configLoading,
+    form.source,
+    form.destination,
+    remoteConfig.selectedRemote,
+    form.syncMode,
+    form.useSubfolder,
+    form.createBackup,
+    form.deleteExcluded,
+    form.selectedFiles,
+    saveConfig,
+  ]);
 
   useEffect(() => {
     const unlistenPromise = listen<string>("gdrive-auth-url", (event) => {

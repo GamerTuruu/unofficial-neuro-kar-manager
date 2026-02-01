@@ -9,7 +9,9 @@ export function useDownloadProcess() {
   const [status, setStatus] = useState("");
   const [log, setLog] = useState("");
   const [dryRunResult, setDryRunResult] = useState<DryRunResult | null>(null);
-  const [pendingParams, setPendingParams] = useState<DownloadParams | null>(null);
+  const [pendingParams, setPendingParams] = useState<DownloadParams | null>(
+    null,
+  );
 
   const appendLog = (message: string) => {
     setLog((prev) => `${prev}${message}\n`);
@@ -47,7 +49,7 @@ export function useDownloadProcess() {
       setStatus("Cancelled.");
       return;
     }
-    
+
     // If already cancelling, ignore
     if (cancelling) return;
 
@@ -67,8 +69,8 @@ export function useDownloadProcess() {
 
   const runDownload = async (params: DownloadParams) => {
     if (isCancelledRef.current) {
-         handleTransferCancelled();
-         return;
+      handleTransferCancelled();
+      return;
     }
 
     setLoading(true);
@@ -106,7 +108,7 @@ export function useDownloadProcess() {
 
   const startDownload = async (params: DownloadParams) => {
     setCancelledState(false);
-    
+
     const logMessage = `Download Configuration:\nSource: ${params.source}\nDestination: ${params.destination}\nRemote: ${params.remoteConfig}\nBackup: ${params.createBackup ? "Yes" : "No"}\nSync Mode: ${params.syncMode ? "Yes" : "No"}\n`;
     const deleteExcludedLog = params.syncMode
       ? `Delete Excluded: ${params.deleteExcluded ? "Yes" : "No"}\n`
@@ -143,7 +145,9 @@ export function useDownloadProcess() {
       appendLog(`Dry run complete: ${result.stats}`);
 
       if (result.would_delete) {
-        appendLog("Warning: Files will be deleted. Waiting for confirmation...");
+        appendLog(
+          "Warning: Files will be deleted. Waiting for confirmation...",
+        );
         setDryRunResult(result);
         setPendingParams(params);
         setLoading(false);

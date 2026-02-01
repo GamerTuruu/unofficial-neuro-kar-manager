@@ -85,7 +85,8 @@ export function DestinationSection({
             </HoverCardTrigger>
             <HoverCardContent className="w-80">
               <p className="text-sm">
-                Copy will only download/update files. Sync can additionally delete unwanted files (including if files were renamed).
+                Copy will only download/update files. Sync can additionally
+                delete unwanted files (including if files were renamed).
               </p>
             </HoverCardContent>
           </HoverCard>
