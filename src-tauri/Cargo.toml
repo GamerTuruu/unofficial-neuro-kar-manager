@@ -1,6 +1,6 @@
 [package]
 name = "unofficial-neuro-kar-manager"
-version = "0.0.1"
+version = "0.0.2"
 description = "A Tauri App"
 authors = ["Inforno"]
 edition = "2024"

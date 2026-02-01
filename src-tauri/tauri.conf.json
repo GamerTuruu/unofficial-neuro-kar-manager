@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "unofficial-neuro-kar-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "identifier": "com.inforno.unofficial-neuro-kar-manager",
   "build": {
     "beforeDevCommand": "pnpm dev",
