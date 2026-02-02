@@ -39,7 +39,6 @@ fn setup_sidecar() {
         "cargo:warning=Sidecar not found. Downloading rclone for target: {}",
         target_triple
     );
-
     // Map Rust target triple to Rclone platform/arch
     let (os, arch) = if target_triple.contains("windows") {
         ("windows", "amd64")
@@ -50,7 +49,13 @@ fn setup_sidecar() {
             ("osx", "amd64")
         }
     } else if target_triple.contains("linux") {
-        ("linux", "amd64")
+        if target_triple.contains("aarch64") {
+            ("linux", "arm64")
+        } else if target_triple.contains("armv7") {
+            ("linux", "arm-v7")
+        } else {
+            ("linux", "amd64")
+        }
     } else {
         panic!(
             "Unsupported target triple for rclone setup: {}",
