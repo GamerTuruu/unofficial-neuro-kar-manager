@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { Folder, Info, Key } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,7 +42,7 @@ export function RemoteConfigSection({
       <div className="flex items-center gap-2">
         <Label htmlFor="remote-config" className="flex items-center gap-2">
           <Folder className="h-4 w-4" />
-          Rclone Remote Config
+          <Trans>Rclone Remote Config</Trans>
         </Label>
         <HoverCard>
           <HoverCardTrigger asChild>
@@ -48,9 +50,12 @@ export function RemoteConfigSection({
           </HoverCardTrigger>
           <HoverCardContent className="w-80">
             <p className="text-sm">
-              If "Generate New Config" is selected, clicking the Key button will
-              open a one-time authorization window in your browser. The config
-              will be saved as "{DEFAULT_RCLONE_CONFIG_NAME}" for future use.
+              <Trans>
+                If "Generate New Config" is selected, clicking the Key button
+                will open a one-time authorization window in your browser. The
+                config will be saved as "{DEFAULT_RCLONE_CONFIG_NAME}" for
+                future use.
+              </Trans>
             </p>
           </HoverCardContent>
         </HoverCard>
@@ -68,10 +73,12 @@ export function RemoteConfigSection({
             disabled={disabled || loading}
           >
             <SelectTrigger id="remote-config">
-              <SelectValue placeholder="Select a remote" />
+              <SelectValue placeholder={t`Select a remote`} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="new_config">Generate New Config</SelectItem>
+              <SelectItem value="new_config">
+                <Trans>Generate New Config</Trans>
+              </SelectItem>
               {remotes.map((remote) => (
                 <SelectItem key={remote} value={remote}>
                   {remote}
@@ -90,7 +97,7 @@ export function RemoteConfigSection({
               size="icon"
               onClick={onCreateConfig}
               disabled={disabled || loading}
-              title="Authenticate & Generate Config"
+              title={t`Authenticate & Generate Config`}
               className="relative h-full w-full bg-background hover:bg-background/90"
             >
               <Key className="h-4 w-4" />

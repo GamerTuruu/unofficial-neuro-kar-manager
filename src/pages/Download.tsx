@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { open } from "@tauri-apps/plugin-dialog";
@@ -214,10 +215,12 @@ export default function DownloadPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <DownloadCloud className="h-8 w-8" />
-            GDrive Download
+            <Trans>GDrive Download</Trans>
           </h1>
           <p className="text-muted-foreground mt-2">
-            Download content directly from Google Drive using rclone.
+            <Trans>
+              Download content directly from Google Drive using rclone.
+            </Trans>
           </p>
         </div>
         <DownloadsButton />
@@ -275,7 +278,11 @@ export default function DownloadPage() {
                 disabled={download.cancelling}
                 className="w-full"
               >
-                {download.cancelling ? "Cancelling..." : "Cancel Download"}
+                {download.cancelling ? (
+                  <Trans>Cancelling...</Trans>
+                ) : (
+                  <Trans>Cancel Download</Trans>
+                )}
               </Button>
             ) : (
               <Button
@@ -283,7 +290,7 @@ export default function DownloadPage() {
                 className="w-full"
                 disabled={!remoteConfig.isConfigValid}
               >
-                Start Download
+                <Trans>Start Download</Trans>
               </Button>
             )}
           </CardFooter>

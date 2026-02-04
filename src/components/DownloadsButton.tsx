@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Plural, Trans } from "@lingui/react/macro";
 import { Download } from "lucide-react";
 import { TransferStatus } from "@/components/TransferStatus";
 import { Button } from "@/components/ui/button";
@@ -21,7 +23,7 @@ export function DownloadsButton() {
           variant="ghost"
           size="icon"
           className="relative"
-          title="Downloads"
+          title={t`Downloads`}
         >
           <Download className="h-5 w-5" />
           {isTransferring && (
@@ -32,14 +34,20 @@ export function DownloadsButton() {
       <PopoverContent className="w-80 sm:w-96 p-0" align="end">
         <div className="flex flex-col space-y-1.5 p-4 text-center sm:text-left border-b">
           <h4 className="font-semibold leading-none tracking-tight">
-            Downloads
+            <Trans>Downloads</Trans>
           </h4>
           {isTransferring ? (
             <p className="text-xs text-muted-foreground">
-              {activeCount} active transfer{activeCount !== 1 ? "s" : ""}
+              <Plural
+                value={activeCount}
+                one="# active transfer"
+                other="# active transfers"
+              />
             </p>
           ) : (
-            <p className="text-xs text-muted-foreground">No active transfers</p>
+            <p className="text-xs text-muted-foreground">
+              <Trans>No active transfers</Trans>
+            </p>
           )}
         </div>
         <ScrollArea className="h-[min(60vh,300px)]">

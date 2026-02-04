@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { Info, Settings, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -49,7 +50,7 @@ export function AdvancedOptionsModal({
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <Settings className="h-5 w-5" />
-              Advanced Options
+              <Trans>Advanced Options</Trans>
             </h2>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
@@ -71,15 +72,17 @@ export function AdvancedOptionsModal({
               htmlFor="useSubfolder"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
             >
-              Place items in subfolder
+              <Trans>Place items in subfolder</Trans>
               <HoverCard>
                 <HoverCardTrigger asChild>
                   <Info className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <p className="text-sm">
-                    Appends '/Unofficial-Neuro-Karaoke-Archive' to the destination
-                    path.
+                    <Trans>
+                      Appends '/Unofficial-Neuro-Karaoke-Archive' to the
+                      destination path.
+                    </Trans>
                   </p>
                 </HoverCardContent>
               </HoverCard>
@@ -98,15 +101,17 @@ export function AdvancedOptionsModal({
               htmlFor="createBackup"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
             >
-              Create Backup Folder
+              <Trans>Create Backup Folder</Trans>
               <HoverCard>
                 <HoverCardTrigger asChild>
                   <Info className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <p className="text-sm">
-                    Generate a Backup Folder outside of the destination at
-                    Backup-KAR-{"{TIME}"}
+                    <Trans>
+                      Generate a Backup Folder outside of the destination at
+                      Backup-KAR-{"{TIME}"}
+                    </Trans>
                   </p>
                 </HoverCardContent>
               </HoverCard>
@@ -125,16 +130,20 @@ export function AdvancedOptionsModal({
               htmlFor="deleteExcluded"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
             >
-              Delete files not in selection
+              <Trans>Delete excluded files</Trans>
               <HoverCard>
                 <HoverCardTrigger asChild>
                   <Info className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <p className="text-sm">
-                    Only applies if there is a filter selection. While download sync
-                    will delete files not in the archive normally, it may fail to
-                    delete excluded files unless this is checked.
+                    <Trans>
+                      While download sync will delete files not in the archive
+                      normally, it may fail to delete excluded files unless this
+                      is checked. Only active in Sync Mode. Only applies if
+                      there is a filter selection. Equivalent to
+                      --delete-excluded.
+                    </Trans>
                   </p>
                 </HoverCardContent>
               </HoverCard>
@@ -153,14 +162,18 @@ export function AdvancedOptionsModal({
               htmlFor="trackRenames"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
             >
-              Track Renames (Hash Strategy)
+              <Trans>Track Renames (Hash Strategy)</Trans>
               <HoverCard>
                 <HoverCardTrigger asChild>
                   <Info className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
                 </HoverCardTrigger>
                 <HoverCardContent className="w-80">
                   <p className="text-sm">
-                    Enables --track-renames with hash strategy. Useful when files are moved or renamed on source, to avoid re-downloading them. Only active in Sync Mode.
+                    <Trans>
+                      Avoid redownloading files by checking if they are renamed
+                      or moved. Only active in Sync Mode. --track-renames with
+                      hash strategy.
+                    </Trans>
                   </p>
                 </HoverCardContent>
               </HoverCard>
@@ -169,7 +182,9 @@ export function AdvancedOptionsModal({
         </div>
 
         <div className="p-4 border-t bg-muted/30 flex justify-end">
-          <Button onClick={onClose}>Done</Button>
+          <Button onClick={onClose}>
+            <Trans>Done</Trans>
+          </Button>
         </div>
       </Card>
     </div>

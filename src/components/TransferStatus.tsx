@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { Activity, FileIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -49,7 +50,7 @@ export function TransferStatus({
     if (compact)
       return (
         <div className="p-4 text-center text-muted-foreground text-sm">
-          No active transfers
+          <Trans>No active transfers</Trans>
         </div>
       );
     return null;
@@ -86,7 +87,7 @@ export function TransferStatus({
           ))}
         </div>
         <div className="p-2 border-t bg-muted/50 text-xs text-center text-muted-foreground">
-          Total Speed: {formatBytes(stats.speed)}/s
+          <Trans>Total Speed: {formatBytes(stats.speed)}/s</Trans>
         </div>
       </div>
     );
@@ -97,9 +98,9 @@ export function TransferStatus({
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-2xl">
           <Activity className="h-5 w-5" />
-          Active Transfers
+          <Trans>Active Transfers</Trans>
           <span className="text-sm font-normal text-muted-foreground ml-auto">
-            Total Speed: {formatBytes(stats.speed)}/s
+            <Trans>Total Speed: {formatBytes(stats.speed)}/s</Trans>
           </span>
         </CardTitle>
       </CardHeader>

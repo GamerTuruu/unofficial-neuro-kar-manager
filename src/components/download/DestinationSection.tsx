@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { Folder, Info, Save, Settings } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -68,7 +70,7 @@ export function DestinationSection({
 
       <Label htmlFor="destination" className="flex items-center gap-2">
         <Save className="h-4 w-4" />
-        Destination (Local Folder Path)
+        <Trans>Destination (Local Folder Path)</Trans>
       </Label>
       <div className="flex gap-2">
         <Input
@@ -85,7 +87,7 @@ export function DestinationSection({
           size="icon"
           onClick={onSelectFolder}
           disabled={disabled}
-          title="Select Folder"
+          title={t`Select Folder`}
         >
           <Folder className="h-4 w-4" />
         </Button>
@@ -102,15 +104,21 @@ export function DestinationSection({
             htmlFor="syncMode"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
           >
-            {syncMode ? "Sync Mode (Destructive)" : "Copy Mode (Download Only)"}
+            {syncMode ? (
+              <Trans>Sync Mode (Destructive)</Trans>
+            ) : (
+              <Trans>Copy Mode (Download Only)</Trans>
+            )}
             <HoverCard>
               <HoverCardTrigger asChild>
                 <Info className="h-3 w-3 cursor-pointer text-muted-foreground hover:text-foreground transition-colors" />
               </HoverCardTrigger>
               <HoverCardContent className="w-80">
                 <p className="text-sm">
-                  Copy will only download/update files. Sync can additionally
-                  delete unwanted files (including if files were renamed).
+                  <Trans>
+                    Copy will only download/update files. Sync can additionally
+                    delete unwanted files (including if files were renamed).
+                  </Trans>
                 </p>
               </HoverCardContent>
             </HoverCard>
@@ -125,7 +133,7 @@ export function DestinationSection({
           type="button"
         >
           <Settings className="mr-2 h-4 w-4" />
-          Advanced Options
+          <Trans>Advanced Options</Trans>
         </Button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { Plural, Trans } from "@lingui/react/macro";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,18 +35,29 @@ export function BackupWarningDialog({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {wouldDelete
-              ? "Warning: Files Will Be Deleted"
-              : "Warning: Potentially Destructive Operation"}
+            {wouldDelete ? (
+              <Trans>Warning: Files Will Be Deleted</Trans>
+            ) : (
+              <Trans>Warning: Potentially Destructive Operation</Trans>
+            )}
           </AlertDialogTitle>
           <AlertDialogDescription className="space-y-3">
             {wouldDelete ? (
               <>
                 <p>
-                  The dry run detected that{" "}
-                  <strong>{deletedCount > 0 ? deletedCount : "some"}</strong>{" "}
-                  file(s) in the destination will be deleted during this sync
-                  operation.
+                  <Trans>
+                    The dry run detected that{" "}
+                    <strong>
+                      <Plural
+                        value={deletedCount}
+                        _0="some files"
+                        one="# file"
+                        other="# files"
+                      />
+                    </strong>{" "}
+                    in the destination will be deleted during this sync
+                    operation.
+                  </Trans>
                 </p>
                 {deletedCount > 0 && (
                   <div className="border rounded-md bg-muted/50">
@@ -70,37 +82,47 @@ export function BackupWarningDialog({
                 )}
                 {!hasBackup && (
                   <p className="text-red-600 dark:text-red-400 font-semibold">
-                    ⚠️ You have backups disabled! Deleted files will be
-                    permanently lost.
+                    <Trans>
+                      ⚠️ You have backups disabled! Deleted files will be
+                      permanently lost.
+                    </Trans>
                   </p>
                 )}
                 {hasBackup && (
                   <p className="text-green-600 dark:text-green-400">
-                    ✓ A backup will be created before syncing.
+                    <Trans>✓ A backup will be created before syncing.</Trans>
                   </p>
                 )}
               </>
             ) : (
               <>
                 <p>
-                  This sync operation may overwrite or delete files in the
-                  destination folder that don't exist in the source.
+                  <Trans>
+                    This sync operation may overwrite or delete files in the
+                    destination folder that don't exist in the source.
+                  </Trans>
                 </p>
                 {!hasBackup && (
                   <p className="text-red-600 dark:text-red-400 font-semibold">
-                    ⚠️ You have backups disabled! Any deleted files will be
-                    permanently lost.
+                    <Trans>
+                      ⚠️ You have backups disabled! Any deleted files will be
+                      permanently lost.
+                    </Trans>
                   </p>
                 )}
               </>
             )}
-            <p className="pt-2">Are you sure you want to continue?</p>
+            <p className="pt-2">
+              <Trans>Are you sure you want to continue?</Trans>
+            </p>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>
+            <Trans>Cancel</Trans>
+          </AlertDialogCancel>
           <AlertDialogAction variant="destructive" onClick={onConfirm}>
-            Yes, Continue
+            <Trans>Yes, Continue</Trans>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

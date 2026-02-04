@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { Check, Copy, ExternalLink, Link as LinkIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -55,17 +57,21 @@ export function AuthDialog({ url, open, onOpenChange }: AuthDialogProps) {
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Authorization Required</AlertDialogTitle>
+          <AlertDialogTitle>
+            <Trans>Authorization Required</Trans>
+          </AlertDialogTitle>
           <AlertDialogDescription>
-            Please authorize the application to access Google Drive by visiting
-            the link below.
+            <Trans>
+              Please authorize the application to access Google Drive by
+              visiting the link below.
+            </Trans>
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <div className="flex items-center space-x-2 my-4">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="auth-link" className="sr-only">
-              Link
+              <Trans>Link</Trans>
             </Label>
             <div className="relative">
               <Input
@@ -84,7 +90,7 @@ export function AuthDialog({ url, open, onOpenChange }: AuthDialogProps) {
             size="icon"
             variant="outline"
             onClick={handleCopy}
-            title="Copy to clipboard"
+            title={t`Copy to clipboard`}
           >
             {copied ? (
               <Check className="h-4 w-4 text-green-500" />
@@ -96,7 +102,7 @@ export function AuthDialog({ url, open, onOpenChange }: AuthDialogProps) {
 
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => onOpenChange(false)}>
-            Cancel
+            <Trans>Cancel</Trans>
           </AlertDialogCancel>
           <Button onClick={handleOpen}>
             <ExternalLink className="mr-2 h-4 w-4" />

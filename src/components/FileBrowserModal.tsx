@@ -1,3 +1,5 @@
+import { t } from "@lingui/core/macro";
+import { Plural, Trans } from "@lingui/react/macro";
 import { invoke } from "@tauri-apps/api/core";
 import {
   ArrowLeft,
@@ -229,7 +231,7 @@ export default function FileBrowserModal({
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <Folder className="h-5 w-5" />
-              Browse Drive
+              <Trans>Browse Drive</Trans>
             </h2>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-4 w-4" />
@@ -259,14 +261,14 @@ export default function FileBrowserModal({
               </div>
             ) : (
               <div className="flex-1 px-3 py-2 bg-accent/50 border rounded-md text-sm font-medium italic">
-                Search results for "{debouncedSearch}"
+                <Trans>Search results for "{debouncedSearch}"</Trans>
               </div>
             )}
 
             <div className="relative w-64">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search all files..."
+                placeholder={t`Search all files...`}
                 className="pl-8"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -280,9 +282,11 @@ export default function FileBrowserModal({
           {loading ? (
             <div className="flex flex-col items-center justify-center h-full py-20 text-muted-foreground">
               <Loader2 className="h-8 w-8 animate-spin mb-2" />
-              <p>Fetching file list...</p>
+              <p>
+                <Trans>Fetching file list...</Trans>
+              </p>
               <p className="text-xs mt-2 opacity-70">
-                This might take a moment
+                <Trans>This might take a moment</Trans>
               </p>
             </div>
           ) : error ? (
@@ -291,7 +295,7 @@ export default function FileBrowserModal({
             <div className="space-y-1">
               {sortedDisplayItems.length === 0 ? (
                 <p className="text-center text-muted-foreground py-8">
-                  No items found.
+                  <Trans>No items found.</Trans>
                 </p>
               ) : (
                 sortedDisplayItems.map((item) => (
@@ -334,9 +338,11 @@ export default function FileBrowserModal({
                           {debouncedSearch ? item.path : item.name}
                         </p>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {item.isDir
-                            ? "Folder"
-                            : `${(item.size / 1024 / 1024).toFixed(2)} MB`}
+                          {item.isDir ? (
+                            <Trans>Folder</Trans>
+                          ) : (
+                            `${(item.size / 1024 / 1024).toFixed(2)} MB`
+                          )}
                         </p>
                       </div>
 
@@ -364,10 +370,14 @@ export default function FileBrowserModal({
               htmlFor="select-all"
               className="text-sm font-medium cursor-pointer select-none"
             >
-              Select Visible
+              <Trans>Select Visible</Trans>
             </label>
             <span className="ml-4 text-sm text-muted-foreground border-l pl-4">
-              {selection.size} item{selection.size !== 1 && "s"} selected
+              <Plural
+                value={selection.size}
+                one="# item selected"
+                other="# items selected"
+              />
             </span>
           </div>
 
@@ -377,20 +387,20 @@ export default function FileBrowserModal({
                 variant="secondary"
                 onClick={handleScanDestination}
                 disabled={loading || scanning}
-                title="Select existing files from destination"
+                title={t`Select existing files from destination`}
               >
                 <RefreshCw
                   className={`mr-2 h-4 w-4 ${scanning ? "animate-spin" : ""}`}
                 />
-                Select from Destination
+                <Trans>Select from Destination</Trans>
               </Button>
             )}
             <Button variant="outline" onClick={onClose}>
-              Cancel
+              <Trans>Cancel</Trans>
             </Button>
             <Button onClick={() => onConfirm(Array.from(selection))}>
               <Check className="mr-2 h-4 w-4" />
-              Confirm Selection
+              <Trans>Confirm Selection</Trans>
             </Button>
           </div>
         </div>

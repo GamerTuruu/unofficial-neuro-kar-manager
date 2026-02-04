@@ -1,0 +1,335 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-02-03 00:58-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#. placeholder {0}: selection.size
+#: src/components/FileBrowserModal.tsx
+msgid "{0, plural, one {# item selected} other {# items selected}}"
+msgstr "{0, plural, one {# item selected} other {# items selected}}"
+
+#. placeholder {0}: selectedFiles.length
+#: src/components/download/SourceInputSection.tsx
+msgid "{0} files/folders selected for download."
+msgstr "{0} files/folders selected for download."
+
+#: src/components/DownloadsButton.tsx
+msgid "{activeCount, plural, one {# active transfer} other {# active transfers}}"
+msgstr "{activeCount, plural, one {# active transfer} other {# active transfers}}"
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "⚠️ You have backups disabled! Any deleted files will be permanently lost."
+msgstr "⚠️ You have backups disabled! Any deleted files will be permanently lost."
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "⚠️ You have backups disabled! Deleted files will be permanently lost."
+msgstr "⚠️ You have backups disabled! Deleted files will be permanently lost."
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "✓ A backup will be created before syncing."
+msgstr "✓ A backup will be created before syncing."
+
+#: src/components/TransferStatus.tsx
+msgid "Active Transfers"
+msgstr "Active Transfers"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+#: src/components/download/DestinationSection.tsx
+msgid "Advanced Options"
+msgstr "Advanced Options"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Appends '/Unofficial-Neuro-Karaoke-Archive' to the destination path."
+msgstr "Appends '/Unofficial-Neuro-Karaoke-Archive' to the destination path."
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "Are you sure you want to continue?"
+msgstr "Are you sure you want to continue?"
+
+#: src/components/download/RemoteConfigSection.tsx
+msgid "Authenticate & Generate Config"
+msgstr "Authenticate & Generate Config"
+
+#: src/components/download/AuthDialog.tsx
+msgid "Authorization Required"
+msgstr "Authorization Required"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Avoid redownloading files by checking if they are renamed or moved. Only active in Sync Mode. --track-renames with hash strategy."
+msgstr "Avoid redownloading files by checking if they are renamed or moved. Only active in Sync Mode. --track-renames with hash strategy."
+
+#: src/components/FileBrowserModal.tsx
+msgid "Browse Drive"
+msgstr "Browse Drive"
+
+#: src/components/download/SourceInputSection.tsx
+msgid "Browse Files"
+msgstr "Browse Files"
+
+#: src/components/download/AuthDialog.tsx
+#: src/components/download/BackupWarningDialog.tsx
+#: src/components/FileBrowserModal.tsx
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/pages/Download.tsx
+msgid "Cancel Download"
+msgstr "Cancel Download"
+
+#: src/pages/Download.tsx
+msgid "Cancelling..."
+msgstr "Cancelling..."
+
+#: src/components/download/SourceInputSection.tsx
+msgid "Clear"
+msgstr "Clear"
+
+#: src/components/FileBrowserModal.tsx
+msgid "Confirm Selection"
+msgstr "Confirm Selection"
+
+#: src/components/download/DestinationSection.tsx
+msgid "Copy Mode (Download Only)"
+msgstr "Copy Mode (Download Only)"
+
+#: src/components/download/AuthDialog.tsx
+msgid "Copy to clipboard"
+msgstr "Copy to clipboard"
+
+#: src/components/download/DestinationSection.tsx
+msgid "Copy will only download/update files. Sync can additionally delete unwanted files (including if files were renamed)."
+msgstr "Copy will only download/update files. Sync can additionally delete unwanted files (including if files were renamed)."
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Create Backup Folder"
+msgstr "Create Backup Folder"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Delete excluded files"
+msgstr "Delete excluded files"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+#~ msgid "Delete files not in selection"
+#~ msgstr "Delete files not in selection"
+
+#: src/components/download/DestinationSection.tsx
+msgid "Destination (Local Folder Path)"
+msgstr "Destination (Local Folder Path)"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Done"
+msgstr "Done"
+
+#: src/pages/Download.tsx
+msgid "Download content directly from Google Drive using rclone."
+msgstr "Download content directly from Google Drive using rclone."
+
+#: src/components/DownloadsButton.tsx
+#: src/components/DownloadsButton.tsx
+msgid "Downloads"
+msgstr "Downloads"
+
+#: src/components/download/SourceInputSection.tsx
+msgid "e.g. 1AbCdEfGhIjK..."
+msgstr "e.g. 1AbCdEfGhIjK..."
+
+#: src/components/download/AdvancedOptionsModal.tsx
+#~ msgid "Enables --track-renames with hash strategy. Useful when files are moved or renamed on source, to avoid re-downloading them. Only active in Sync Mode."
+#~ msgstr "Enables --track-renames with hash strategy. Useful when files are moved or renamed on source, to avoid re-downloading them. Only active in Sync Mode."
+
+#: src/pages/InitPage.tsx
+#~ msgid "Error: {e}"
+#~ msgstr "Error: {e}"
+
+#: src/pages/InitPage.tsx
+msgid "Error: Rclone binary not found. It should be bundled with the app. Please report this to the developers."
+msgstr "Error: Rclone binary not found. It should be bundled with the app. Please report this to the developers."
+
+#: src/components/FileBrowserModal.tsx
+msgid "Fetching file list..."
+msgstr "Fetching file list..."
+
+#: src/pages/InitPage.tsx
+msgid "Finding Rclone..."
+msgstr "Finding Rclone..."
+
+#: src/components/FileBrowserModal.tsx
+msgid "Folder"
+msgstr "Folder"
+
+#: src/pages/InitPage.tsx
+msgid "Found Rclone."
+msgstr "Found Rclone."
+
+#: src/pages/Download.tsx
+msgid "GDrive Download"
+msgstr "GDrive Download"
+
+#: src/components/download/SourceInputSection.tsx
+msgid "GDrive Source (Link or ID)"
+msgstr "GDrive Source (Link or ID)"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Generate a Backup Folder outside of the destination at Backup-KAR-{TIME}"
+msgstr "Generate a Backup Folder outside of the destination at Backup-KAR-{TIME}"
+
+#: src/components/download/RemoteConfigSection.tsx
+msgid "Generate New Config"
+msgstr "Generate New Config"
+
+#: src/components/download/RemoteConfigSection.tsx
+msgid "If \"Generate New Config\" is selected, clicking the Key button will open a one-time authorization window in your browser. The config will be saved as \"{DEFAULT_RCLONE_CONFIG_NAME}\" for future use."
+msgstr "If \"Generate New Config\" is selected, clicking the Key button will open a one-time authorization window in your browser. The config will be saved as \"{DEFAULT_RCLONE_CONFIG_NAME}\" for future use."
+
+#: src/pages/InitPage.tsx
+msgid "Initializing..."
+msgstr "Initializing..."
+
+#: src/components/download/AuthDialog.tsx
+msgid "Link"
+msgstr "Link"
+
+#: src/components/download/DownloadLogs.tsx
+msgid "Logs"
+msgstr "Logs"
+
+#: src/components/DownloadsButton.tsx
+#: src/components/TransferStatus.tsx
+msgid "No active transfers"
+msgstr "No active transfers"
+
+#: src/components/FileBrowserModal.tsx
+msgid "No items found."
+msgstr "No items found."
+
+#: src/components/download/AdvancedOptionsModal.tsx
+#~ msgid "Only applies if there is a filter selection. While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked."
+#~ msgstr "Only applies if there is a filter selection. While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked."
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Place items in subfolder"
+msgstr "Place items in subfolder"
+
+#: src/components/download/AuthDialog.tsx
+msgid "Please authorize the application to access Google Drive by visiting the link below."
+msgstr "Please authorize the application to access Google Drive by visiting the link below."
+
+#: src/components/download/RemoteConfigSection.tsx
+msgid "Rclone Remote Config"
+msgstr "Rclone Remote Config"
+
+#: src/components/download/DownloadLogs.tsx
+msgid "Ready to download."
+msgstr "Ready to download."
+
+#: src/components/FileBrowserModal.tsx
+msgid "Search all files..."
+msgstr "Search all files..."
+
+#: src/components/FileBrowserModal.tsx
+msgid "Search results for \"{debouncedSearch}\""
+msgstr "Search results for \"{debouncedSearch}\""
+
+#: src/components/download/RemoteConfigSection.tsx
+msgid "Select a remote"
+msgstr "Select a remote"
+
+#: src/components/FileBrowserModal.tsx
+msgid "Select existing files from destination"
+msgstr "Select existing files from destination"
+
+#: src/components/download/DestinationSection.tsx
+msgid "Select Folder"
+msgstr "Select Folder"
+
+#: src/components/FileBrowserModal.tsx
+msgid "Select from Destination"
+msgstr "Select from Destination"
+
+#: src/components/FileBrowserModal.tsx
+msgid "Select Visible"
+msgstr "Select Visible"
+
+#: src/pages/InitPage.tsx
+msgid "Setup"
+msgstr "Setup"
+
+#: src/components/download/BackupWarningDialog.tsx
+#~ msgid "some"
+#~ msgstr "some"
+
+#: src/pages/Download.tsx
+msgid "Start Download"
+msgstr "Start Download"
+
+#: src/components/download/DownloadLogs.tsx
+msgid "Starting download process..."
+msgstr "Starting download process..."
+
+#: src/components/download/DestinationSection.tsx
+msgid "Sync Mode (Destructive)"
+msgstr "Sync Mode (Destructive)"
+
+#: src/components/download/BackupWarningDialog.tsx
+#~ msgid "The dry run detected that <0>{0}</0> file(s) in the destination will be deleted during this sync operation."
+#~ msgstr "The dry run detected that <0>{0}</0> file(s) in the destination will be deleted during this sync operation."
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "The dry run detected that <0>{deletedCount, plural, =0 {some files} one {# file} other {# files}}</0> in the destination will be deleted during this sync operation."
+msgstr "The dry run detected that <0>{deletedCount, plural, =0 {some files} one {# file} other {# files}}</0> in the destination will be deleted during this sync operation."
+
+#: src/components/FileBrowserModal.tsx
+msgid "This might take a moment"
+msgstr "This might take a moment"
+
+#: src/pages/HomePage.tsx
+msgid "This page is under construction"
+msgstr "This page is under construction"
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "This sync operation may overwrite or delete files in the destination folder that don't exist in the source."
+msgstr "This sync operation may overwrite or delete files in the destination folder that don't exist in the source."
+
+#. placeholder {0}: formatBytes(stats.speed)
+#: src/components/TransferStatus.tsx
+#: src/components/TransferStatus.tsx
+msgid "Total Speed: {0}/s"
+msgstr "Total Speed: {0}/s"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "Track Renames (Hash Strategy)"
+msgstr "Track Renames (Hash Strategy)"
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "Warning: Files Will Be Deleted"
+msgstr "Warning: Files Will Be Deleted"
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "Warning: Potentially Destructive Operation"
+msgstr "Warning: Potentially Destructive Operation"
+
+#: src/pages/HomePage.tsx
+#~ msgid "Welcome to Neuro Archive Manager"
+#~ msgstr "Welcome to Neuro Archive Manager"
+
+#: src/pages/HomePage.tsx
+msgid "Welcome to Unofficial Neuro Karaoke Archive Manager"
+msgstr "Welcome to Unofficial Neuro Karaoke Archive Manager"
+
+#: src/components/download/AdvancedOptionsModal.tsx
+msgid "While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked. Only active in Sync Mode. Only applies if there is a filter selection. Equivalent to --delete-excluded."
+msgstr "While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked. Only active in Sync Mode. Only applies if there is a filter selection. Equivalent to --delete-excluded."
+
+#: src/components/download/BackupWarningDialog.tsx
+msgid "Yes, Continue"
+msgstr "Yes, Continue"
