@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: extract
+        name: Run lingui extract
+        entry: sh -c 'cd "$(git rev-parse --show-toplevel)" && pnpm extract'
+        language: system
+        stages: [commit]
+
+      - id: lint
+        name: Run lint
+        entry: sh -c 'cd "$(git rev-parse --show-toplevel)" && pnpm lint'
+        language: system
+        stages: [commit]
