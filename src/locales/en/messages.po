@@ -126,6 +126,10 @@ msgstr "Delete excluded files"
 msgid "Destination (Local Folder Path)"
 msgstr "Destination (Local Folder Path)"
 
+#: src/pages/HomePage.tsx
+msgid "Discord Project Chat"
+msgstr "Discord Project Chat"
+
 #: src/components/download/AdvancedOptionsModal.tsx
 msgid "Done"
 msgstr "Done"
@@ -195,6 +199,10 @@ msgstr "If \"Generate New Config\" is selected, clicking the Key button will ope
 msgid "Initializing..."
 msgstr "Initializing..."
 
+#: src/pages/HomePage.tsx
+#~ msgid "Join Discord"
+#~ msgstr "Join Discord"
+
 #: src/components/download/AuthDialog.tsx
 msgid "Link"
 msgstr "Link"
@@ -202,6 +210,10 @@ msgstr "Link"
 #: src/components/download/DownloadLogs.tsx
 msgid "Logs"
 msgstr "Logs"
+
+#: src/pages/HomePage.tsx
+msgid "Neuro Discord Server"
+msgstr "Neuro Discord Server"
 
 #: src/components/DownloadsButton.tsx
 #: src/components/TransferStatus.tsx
@@ -215,6 +227,10 @@ msgstr "No items found."
 #: src/components/download/AdvancedOptionsModal.tsx
 #~ msgid "Only applies if there is a filter selection. While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked."
 #~ msgstr "Only applies if there is a filter selection. While download sync will delete files not in the archive normally, it may fail to delete excluded files unless this is checked."
+
+#: src/pages/HomePage.tsx
+#~ msgid "Open Google Drive"
+#~ msgstr "Open Google Drive"
 
 #: src/components/download/AdvancedOptionsModal.tsx
 msgid "Place items in subfolder"
@@ -309,6 +325,10 @@ msgstr "Total Speed: {0}/s"
 #: src/components/download/AdvancedOptionsModal.tsx
 msgid "Track Renames (Hash Strategy)"
 msgstr "Track Renames (Hash Strategy)"
+
+#: src/pages/HomePage.tsx
+msgid "Unofficial Neuro Karaoke Archive Google Drive"
+msgstr "Unofficial Neuro Karaoke Archive Google Drive"
 
 #: src/components/download/BackupWarningDialog.tsx
 msgid "Warning: Files Will Be Deleted"
