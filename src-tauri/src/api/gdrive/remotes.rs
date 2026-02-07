@@ -1,7 +1,6 @@
 use crate::api::rclone;
 use crate::utils::extract_json;
 use tauri::{AppHandle, Emitter, Manager, State};
-use tauri_plugin_shell::ShellExt;
 use tauri_plugin_shell::process::CommandEvent;
 use tokio::sync::{Mutex, oneshot};
 
@@ -52,7 +51,7 @@ pub async fn create_gdrive_remote(
     state: State<'_, GdriveAuthState>,
 ) -> Result<String, String> {
     // Authorize with CLI (interactive)
-    let sidecar_command = app.shell().sidecar("rclone").map_err(|e| e.to_string())?;
+    let sidecar_command = rclone::get_rclone_command(&app)?;
 
     let (mut command_rx, child) = sidecar_command
         .args(&["authorize", "drive", "--auth-no-open-browser"])
