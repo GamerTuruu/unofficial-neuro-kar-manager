@@ -4900,7 +4900,7 @@ checksum = "f6ccf251212114b54433ec949fd6a7841275f9ada20dddd2f29e9ceea4501493"
 
 [[package]]
 name = "unofficial-neuro-kar-manager"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "chrono",
  "dirs",
