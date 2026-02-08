@@ -31,7 +31,7 @@ jobs:
             platform: 'ubuntu-22.04'
             assetNamePattern: 'Unoff-NKAR-Manager-[version]-Android-Arm64[ext]'
             mobile: 'android'
-            args: '--target aarch64 --apk true'
+            args: '--target aarch64 --apk true --split-per-abi'
     steps:
       - uses: actions/checkout@v6
 
@@ -83,6 +83,8 @@ jobs:
 
       - uses: tauri-apps/tauri-action@063c0231f444e55760d98acb9c469b994269d4a5  # v1 (dev)
         id: tauri
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           releaseAssetNamePattern: ${{ matrix.assetNamePattern }}
           args: ${{ matrix.args }}

@@ -31,7 +31,7 @@ jobs:
             platform: 'ubuntu-22.04'
             assetNamePattern: 'Unoff-NKAR-Manager-[version]-Android-Arm64[ext]'
             mobile: 'android'
-            args: '--target aarch64 --apk true'
+            args: '--target aarch64 --apk true --split-per-abi'
     steps:
       - uses: actions/checkout@v6
 
