@@ -225,4 +225,8 @@ fn set_executable_permissions(path: &PathBuf) {
         perms.set_mode(0o755);
         fs::set_permissions(path, perms).expect("Failed to set permissions");
     }
+    #[cfg(not(unix))]
+    {
+        let _ = path;
+    }
 }
