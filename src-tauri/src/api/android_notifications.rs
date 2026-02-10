@@ -3,7 +3,7 @@ use tauri::Manager;
 
 #[tauri::command]
 pub async fn show_notification(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
     title: String,
     body: String,
 ) {
@@ -17,7 +17,7 @@ pub async fn show_notification(
 
 #[tauri::command]
 pub async fn show_download_progress(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
     title: String,
     message: String,
     progress: u32,
@@ -37,7 +37,7 @@ pub async fn show_download_progress(
 
 #[tauri::command]
 pub async fn show_download_complete(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
     title: String,
     file_count: u64,
     size_transferred: String,
@@ -58,7 +58,7 @@ pub async fn show_download_complete(
 
 #[tauri::command]
 pub async fn show_download_error(
-    app: tauri::AppHandle,
+    _app: tauri::AppHandle,
     title: String,
     error_message: String,
 ) {

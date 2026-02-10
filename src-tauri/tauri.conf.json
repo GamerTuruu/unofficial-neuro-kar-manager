@@ -52,7 +52,7 @@
       },
       "wix": {
         "fipsCompliant": true,
-				"language": "en-US"
+        "language": "en-US"
       }
     }
   }
