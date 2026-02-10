@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useRef, useState } from "react";
 import type { DownloadParams, DryRunResult } from "@/types/download";
+import { parseDownloadError } from "@/lib/errorMessages";
 
 export function useDownloadProcess() {
   const [loading, setLoading] = useState(false);
@@ -90,6 +91,7 @@ export function useDownloadProcess() {
         createBackup: params.createBackup,
         deleteExcluded: params.deleteExcluded,
         trackRenames: params.trackRenames,
+        bandwidthLimit: params.bandwidthLimit,
       });
       setStatus("Download completed successfully.");
       appendLog(`\n${output}`);
@@ -98,8 +100,9 @@ export function useDownloadProcess() {
         handleTransferCancelled();
       } else {
         console.error(error);
+        const userFriendlyError = parseDownloadError(error);
         setStatus("Download failed.");
-        appendLog(`\nError: ${error}`);
+        appendLog(`\nError: ${userFriendlyError}`);
       }
     } finally {
       setLoading(false);
@@ -177,7 +180,8 @@ export function useDownloadProcess() {
         return;
       }
 
-      appendLog(`\nDry run failed: ${error}`);
+      const userFriendlyError = parseDownloadError(error);
+      appendLog(`\nDry run failed: ${userFriendlyError}`);
       appendLog("You can still proceed, but file deletion status is unknown.");
 
       setDryRunResult({

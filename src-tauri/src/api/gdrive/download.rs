@@ -33,6 +33,7 @@ struct DownloadConfig {
     create_backup: bool,
     delete_excluded: bool,
     track_renames: bool,
+    bandwidth_limit: Option<String>,
 }
 
 /// Paths for source and destination filesystems
@@ -53,6 +54,7 @@ impl DownloadConfig {
         create_backup: bool,
         delete_excluded: bool,
         track_renames: bool,
+        bandwidth_limit: Option<String>,
     ) -> Result<Self, String> {
         let remote_config = remote_config
             .ok_or("Remote configuration is required. Please authorize first.".to_string())?;
@@ -67,6 +69,7 @@ impl DownloadConfig {
             create_backup,
             delete_excluded,
             track_renames,
+            bandwidth_limit,
         })
     }
 
@@ -163,6 +166,10 @@ impl DownloadConfig {
             );
         }
 
+        if let Some(ref bw_limit) = self.bandwidth_limit {
+            config.insert("BwLimit".to_string(), serde_json::json!(bw_limit));
+        }
+
         if !config.is_empty() {
             body["_config"] = serde_json::json!(config);
         }
@@ -200,19 +207,56 @@ fn build_file_filter(files: &[String]) -> serde_json::Value {
     })
 }
 
+/// Retry helper with exponential backoff for transient network errors
+async fn retry_with_backoff<F, T, Fut>(mut f: F, max_retries: u32) -> Result<T, String>
+where
+    F: FnMut() -> Fut,
+    Fut: std::future::Future<Output = Result<T, String>>,
+{
+    let mut retries = 0;
+    loop {
+        match f().await {
+            Ok(result) => return Ok(result),
+            Err(e) => {
+                let err_str = e.to_string().to_lowercase();
+                // Retry on network errors but not on permission or not found errors
+                let is_transient = err_str.contains("timeout")
+                    || err_str.contains("connection")
+                    || err_str.contains("error sending request")
+                    || err_str.contains("temporary failure")
+                    || err_str.contains("reset by peer");
+
+                if is_transient && retries < max_retries {
+                    let backoff_ms = (1000_u64) * 2_u64.pow(retries);
+                    retries += 1;
+                    sleep(Duration::from_millis(backoff_ms)).await;
+                    continue;
+                }
+                return Err(e);
+            }
+        }
+    }
+}
+
 /// Start the sync/copy operation, wait for completion, and return the results
 async fn start_sync_job(
     client: &rclone_sdk::Client,
     body: &serde_json::Value,
     endpoint: &str,
 ) -> Result<SyncJobResult, String> {
-    let response = client
-        .client()
-        .post(format!("{}{}", client.baseurl(), endpoint))
-        .json(body)
-        .send()
-        .await
-        .map_err(|e| format!("Sync start failed: {}", e))?;
+    let response = retry_with_backoff(
+        || async {
+            client
+                .client()
+                .post(format!("{}{}", client.baseurl(), endpoint))
+                .json(body)
+                .send()
+                .await
+                .map_err(|e| format!("Sync start failed: {}", e))
+        },
+        3,
+    )
+    .await?;
 
     if !response.status().is_success() {
         let err_text = response.text().await.unwrap_or_default();
@@ -235,18 +279,31 @@ async fn start_sync_job(
 
 /// Poll for job completion
 async fn poll_job_completion(client: &rclone_sdk::Client, jobid: i64) -> Result<(), String> {
+    let mut consecutive_errors = 0;
+    const MAX_CONSECUTIVE_ERRORS: u32 = 5;
+
     loop {
-        let response_result = client
-            .client()
-            .post(format!("{}/job/status", client.baseurl()))
-            .json(&serde_json::json!({
-                "jobid": jobid
-            }))
-            .send()
-            .await;
+        let response_result = retry_with_backoff(
+            || async {
+                client
+                    .client()
+                    .post(format!("{}/job/status", client.baseurl()))
+                    .json(&serde_json::json!({
+                        "jobid": jobid
+                    }))
+                    .send()
+                    .await
+                    .map_err(|e| format!("Failed to check job status: {}", e))
+            },
+            2,
+        )
+        .await;
 
         let response = match response_result {
-            Ok(res) => res,
+            Ok(res) => {
+                consecutive_errors = 0;
+                res
+            }
             Err(e) => {
                 let err_str = e.to_string();
                 if err_str.contains("error sending request")
@@ -254,7 +311,12 @@ async fn poll_job_completion(client: &rclone_sdk::Client, jobid: i64) -> Result<
                 {
                     return Err("Download cancelled (server stopped)".to_string());
                 }
-                return Err(format!("Failed to check job status: {}", e));
+                consecutive_errors += 1;
+                if consecutive_errors >= MAX_CONSECUTIVE_ERRORS {
+                    return Err(format!("Too many connection errors: {}", e));
+                }
+                sleep(Duration::from_secs(2)).await;
+                continue;
             }
         };
 
@@ -319,6 +381,7 @@ pub async fn download_gdrive(
     create_backup: bool,
     delete_excluded: bool,
     track_renames: bool,
+    bandwidth_limit: Option<String>,
 ) -> Result<String, String> {
     let config = DownloadConfig::new(
         source,
@@ -330,6 +393,7 @@ pub async fn download_gdrive(
         create_backup,
         delete_excluded,
         track_renames,
+        bandwidth_limit,
     )?;
 
     let client = rclone::get_sdk_client(&app).await?;

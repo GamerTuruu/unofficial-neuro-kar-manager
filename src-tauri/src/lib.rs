@@ -64,6 +64,8 @@ pub fn run() {
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_wakelock::init())
         .manage(SidecarManager::default())
         .manage(api::gdrive::GdriveAuthState::default())
         .invoke_handler(tauri::generate_handler![
@@ -76,7 +78,13 @@ pub fn run() {
             api::gdrive::check_dry_run,
             api::rclone::get_stats,
             api::rclone::stop_rc_server,
-            api::local::scan_local_files
+            api::local::scan_local_files,
+            api::android_notifications::show_notification,
+            api::android_notifications::show_download_progress,
+            api::android_notifications::show_download_complete,
+            api::android_notifications::show_download_error,
+            api::wakelock::request_wakelock,
+            api::wakelock::release_wakelock,
         ])
         .build(tauri::generate_context!())
         .expect("error building tauri application")

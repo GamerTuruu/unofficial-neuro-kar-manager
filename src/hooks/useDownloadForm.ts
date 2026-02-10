@@ -11,9 +11,16 @@ export function useDownloadForm() {
   const [deleteExcluded, setDeleteExcluded] = useState(true);
   const [trackRenames, setTrackRenames] = useState(true);
   const [selectedFiles, setSelectedFiles] = useState<string[] | null>(null);
+  const [bandwidthLimit, setBandwidthLimit] = useState("");
+  const [bandwidthUnit, setBandwidthUnit] = useState("M"); // "K" for KB/s, "M" for MB/s
 
   const isValid = (remoteConfigValid: boolean) => {
     return remoteConfigValid && !!source && !!destination;
+  };
+
+  const getBandwidthLimitString = () => {
+    if (!bandwidthLimit || parseFloat(bandwidthLimit) <= 0) return null;
+    return `${bandwidthLimit}${bandwidthUnit}`;
   };
 
   return {
@@ -33,6 +40,11 @@ export function useDownloadForm() {
     setTrackRenames,
     selectedFiles,
     setSelectedFiles,
+    bandwidthLimit,
+    setBandwidthLimit,
+    bandwidthUnit,
+    setBandwidthUnit,
+    getBandwidthLimitString,
     isValid,
   };
 }

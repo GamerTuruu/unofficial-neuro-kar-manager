@@ -9,6 +9,7 @@ import {
   HybridTooltipTrigger,
 } from "@/components/ui/hybrid-tooltip";
 import { Label } from "@/components/ui/label";
+import { BandwidthLimitSection } from "./BandwidthLimitSection";
 
 interface AdvancedOptionsModalProps {
   isOpen: boolean;
@@ -21,6 +22,10 @@ interface AdvancedOptionsModalProps {
   onDeleteExcludedChange: (checked: boolean) => void;
   trackRenames: boolean;
   onTrackRenamesChange: (checked: boolean) => void;
+  bandwidthLimit: string;
+  onBandwidthLimitChange: (value: string) => void;
+  bandwidthUnit: string;
+  onBandwidthUnitChange: (unit: string) => void;
   disabled: boolean;
   hasFileSelection: boolean;
   syncMode: boolean;
@@ -37,6 +42,10 @@ export function AdvancedOptionsModal({
   onDeleteExcludedChange,
   trackRenames,
   onTrackRenamesChange,
+  bandwidthLimit,
+  onBandwidthLimitChange,
+  bandwidthUnit,
+  onBandwidthUnitChange,
   disabled,
   hasFileSelection,
   syncMode,
@@ -177,6 +186,17 @@ export function AdvancedOptionsModal({
                 </p>
               </HybridTooltipContent>
             </HybridTooltip>
+          </div>
+
+          {/* Bandwidth Limit Section */}
+          <div className="space-y-2 pt-2 border-t">
+            <BandwidthLimitSection
+              bandwidthLimit={bandwidthLimit}
+              onBandwidthLimitChange={onBandwidthLimitChange}
+              bandwidthUnit={bandwidthUnit}
+              onBandwidthUnitChange={onBandwidthUnitChange}
+              disabled={disabled}
+            />
           </div>
         </div>
 

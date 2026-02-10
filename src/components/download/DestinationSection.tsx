@@ -26,6 +26,10 @@ interface DestinationSectionProps {
   onDeleteExcludedChange: (checked: boolean) => void;
   trackRenames: boolean;
   onTrackRenamesChange: (checked: boolean) => void;
+  bandwidthLimit: string;
+  onBandwidthLimitChange: (value: string) => void;
+  bandwidthUnit: string;
+  onBandwidthUnitChange: (unit: string) => void;
   hasFileSelection: boolean;
   onSelectFolder: () => void;
   disabled: boolean;
@@ -44,6 +48,10 @@ export function DestinationSection({
   onDeleteExcludedChange,
   trackRenames,
   onTrackRenamesChange,
+  bandwidthLimit,
+  onBandwidthLimitChange,
+  bandwidthUnit,
+  onBandwidthUnitChange,
   hasFileSelection,
   onSelectFolder,
   disabled,
@@ -63,6 +71,10 @@ export function DestinationSection({
         onDeleteExcludedChange={onDeleteExcludedChange}
         trackRenames={trackRenames}
         onTrackRenamesChange={onTrackRenamesChange}
+        bandwidthLimit={bandwidthLimit}
+        onBandwidthLimitChange={onBandwidthLimitChange}
+        bandwidthUnit={bandwidthUnit}
+        onBandwidthUnitChange={onBandwidthUnitChange}
         disabled={disabled}
         hasFileSelection={hasFileSelection}
         syncMode={syncMode}

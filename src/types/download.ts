@@ -14,4 +14,5 @@ export interface DownloadParams {
   createBackup: boolean;
   deleteExcluded: boolean;
   trackRenames: boolean;
+  bandwidthLimit: string | null; // e.g., "10M" for 10 MB/s, "500K" for 500 KB/s
 }

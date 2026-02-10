@@ -18,6 +18,7 @@ import { useAppConfig } from "@/hooks/useAppConfig";
 import { useDownloadForm } from "@/hooks/useDownloadForm";
 import { useDownloadProcess } from "@/hooks/useDownloadProcess";
 import { useRemoteConfig } from "@/hooks/useRemoteConfig";
+import { useDownloadWakelock } from "@/hooks/useWakelock";
 
 export default function DownloadPage() {
   const { config, loading: configLoading, saveConfig } = useAppConfig();
@@ -25,7 +26,8 @@ export default function DownloadPage() {
   const form = useDownloadForm();
   const download = useDownloadProcess();
 
-  const [showBrowser, setShowBrowser] = useState(false);
+  // Keep Android device awake during downloads
+  useDownloadWakelock(download.loading);
   const [authUrl, setAuthUrl] = useState<string | null>(null);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
 
@@ -179,6 +181,7 @@ export default function DownloadPage() {
       createBackup: form.createBackup,
       deleteExcluded: effectiveDeleteExcluded,
       trackRenames: effectiveTrackRenames,
+      bandwidthLimit: form.getBandwidthLimitString(),
     });
   };
 
@@ -270,6 +273,10 @@ export default function DownloadPage() {
               onDeleteExcludedChange={form.setDeleteExcluded}
               trackRenames={form.trackRenames}
               onTrackRenamesChange={form.setTrackRenames}
+              bandwidthLimit={form.bandwidthLimit}
+              onBandwidthLimitChange={form.setBandwidthLimit}
+              bandwidthUnit={form.bandwidthUnit}
+              onBandwidthUnitChange={form.setBandwidthUnit}
               hasFileSelection={
                 !!form.selectedFiles && form.selectedFiles.length > 0
               }

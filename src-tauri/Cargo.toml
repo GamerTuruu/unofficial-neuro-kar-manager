@@ -30,6 +30,8 @@ tokio = { version = "=1.49.0", features = ["full"] }
 zip = "=7.2.0"
 tauri-plugin-dialog = "2"
 tauri-plugin-process = "2"
+tauri-plugin-notification = "2"
+tauri-plugin-wakelock = "2"
 rclone-sdk = "=1.72.1"
 chrono = "=0.4.43"
 regex = "=1.12.2"
