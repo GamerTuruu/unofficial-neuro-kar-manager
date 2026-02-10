@@ -30,6 +30,7 @@ export default function DownloadPage() {
   useDownloadWakelock(download.loading);
   const [authUrl, setAuthUrl] = useState<string | null>(null);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [showBrowser, setShowBrowser] = useState(false);
 
   const configRef = useRef(config);
   useEffect(() => {

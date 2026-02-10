@@ -1,6 +1,5 @@
 import { Trans } from "@lingui/react/macro";
 import { Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   HybridTooltip,
   HybridTooltipContent,

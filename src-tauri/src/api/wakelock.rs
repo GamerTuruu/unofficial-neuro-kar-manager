@@ -1,16 +1,14 @@
 /// Android wakelock support for keeping the device awake during downloads
-use tauri_plugin_wakelock::WakelockExt;
+/// Note: This is a stub implementation as tauri-plugin-wakelock is not yet published
 
 #[tauri::command]
-pub async fn request_wakelock(app: tauri::AppHandle) -> Result<(), String> {
-    app.wakelock()
-        .request_wakelock()
-        .map_err(|e| format!("Failed to request wakelock: {}", e))
+pub async fn request_wakelock(_app: tauri::AppHandle) -> Result<(), String> {
+    // Wakelock plugin not yet available - this is a no-op for now
+    Ok(())
 }
 
 #[tauri::command]
-pub async fn release_wakelock(app: tauri::AppHandle) -> Result<(), String> {
-    app.wakelock()
-        .release_wakelock()
-        .map_err(|e| format!("Failed to release wakelock: {}", e))
+pub async fn release_wakelock(_app: tauri::AppHandle) -> Result<(), String> {
+    // Wakelock plugin not yet available - this is a no-op for now
+    Ok(())
 }

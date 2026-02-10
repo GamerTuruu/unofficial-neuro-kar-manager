@@ -68,6 +68,10 @@ msgstr "Authorization Required"
 msgid "Avoid redownloading files by checking if they are renamed or moved. Only active in Sync Mode. --track-renames with hash strategy."
 msgstr "Avoid redownloading files by checking if they are renamed or moved. Only active in Sync Mode. --track-renames with hash strategy."
 
+#: src/components/download/BandwidthLimitSection.tsx
+msgid "Bandwidth Limit"
+msgstr "Bandwidth Limit"
+
 #: src/components/FileBrowserModal.tsx
 msgid "Browse Drive"
 msgstr "Browse Drive"
@@ -203,6 +207,10 @@ msgstr "Initializing..."
 #~ msgid "Join Discord"
 #~ msgstr "Join Discord"
 
+#: src/components/download/BandwidthLimitSection.tsx
+msgid "Limit download bandwidth to avoid using all your connection. Leave empty for no limit. Useful for slow or shared connections."
+msgstr "Limit download bandwidth to avoid using all your connection. Leave empty for no limit. Useful for slow or shared connections."
+
 #: src/components/download/AuthDialog.tsx
 msgid "Link"
 msgstr "Link"
@@ -247,6 +255,10 @@ msgstr "Rclone Remote Config"
 #: src/components/download/DownloadLogs.tsx
 msgid "Ready to download."
 msgstr "Ready to download."
+
+#: src/components/download/BandwidthLimitSection.tsx
+msgid "Recommended: 5-10 MB/s on mobile networks"
+msgstr "Recommended: 5-10 MB/s on mobile networks"
 
 #: src/components/FileBrowserModal.tsx
 msgid "Search all files..."
